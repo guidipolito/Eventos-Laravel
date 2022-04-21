@@ -3,5 +3,9 @@
 @section('title', 'home')
 
 @section('content')
-    <h1> Hello World</h1>
+    <pre>
+        @php
+            var_dump(phpinfo());
+        @endphp
+</pre>
 @endsection

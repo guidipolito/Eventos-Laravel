@@ -14,13 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Http\Controllers\EventController;
 
-Route::get('/', function () {
-    return view('welcome', ['nome'=> 'Guilherme']);
-});
+Route::get('/', [EventController::class, 'index']);
 
 Route::get('/contact', function(){
     return view('contact' );
 });
-
-Route::get('/event/{id}', [EventController::class, 'index']);
-Route::get('/event/create', [EventController::class, 'createPage']);
+route::get('/events', [EventController::class, 'index']);
+Route::post('/events', [EventController::class, 'store']);
+Route::get('/events/create', [EventController::class, 'createPage']);

@@ -11,6 +11,18 @@
         <link rel="stylesheet" href="/css/styles.css" >
     </head>
     <body>
+        <header class="main_nav">
+            <navbar>
+                <ul>
+                    <li>
+                        <a href="/">Eventos</a>
+                    </li>
+                    <li>
+                        <a href="/events/create">Criar meu evento</a>
+                    </li>
+                </ul>
+            </navbar> 
+        </header>
        @yield('content')
     </body>
 </html>

@@ -23,7 +23,14 @@
                 </ul>
             </navbar> 
         </header>
-       @yield('content')
+        <main>
+            @if(session('msg'))
+            <div class="msg">
+                <p>{{session('msg')}}</p>
+            </div>
+            @endif
+            @yield('content')
+        </main>
     </body>
 </html>
 

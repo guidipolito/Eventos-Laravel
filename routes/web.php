@@ -20,14 +20,10 @@ Route::get('/contact', function(){
     return view('contact' );
 });
 route::get('/events', [EventController::class, 'index']);
-Route::post('/events', [EventController::class, 'store'])->middleware('auth');
 Route::get('/events/create', [EventController::class, 'createPage'])->middleware('auth');
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+Route::post('/events', [EventController::class, 'store'])->middleware('auth');
+Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth');;
+
+Route::get('/events/create', [EventController::class, 'createPage'])->middleware('auth');
+
+Route::get('/dashboard', [EventController::class, 'dashboard'])->middleware('auth');

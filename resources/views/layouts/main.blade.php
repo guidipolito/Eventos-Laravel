@@ -21,10 +21,21 @@
                         <a href="/events/create">Criar evento</a>
                     </li>
                     @guest
-                    <li>
+                        <li>
                         <a href="/register">Cadastrar</a>
                     </li>
                     @endguest
+                    @auth
+                        <li>
+                            <a href="/dashboard">Meus eventos</a> 
+                        </li>
+                        <li>
+                            <form method="post" action="/logout">
+                                @csrf
+                                <a href="/logout" onclick="event.preventDefault();this.closest('form').submit();">Logout</a>
+                            </form>
+                        </li>
+                    @endauth
                 </ul>
             </navbar> 
         </header>

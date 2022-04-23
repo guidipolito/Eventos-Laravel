@@ -10,6 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\Event;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -59,7 +61,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function events() {
-        return $this->hasMany('App\Models\Event');
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
+
+    public function eventsJoined(){
+        return $this->belongsToMany(Event::class);
     }
 }

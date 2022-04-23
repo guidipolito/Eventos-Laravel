@@ -41,6 +41,8 @@ class EventController extends Controller
             $img->move(public_path('img/events'), $imgName);
             $event->image = $imgName;
         }
+        $user = auth()->user();
+        $event->user_id = $user->id;
         $event->save();
         return redirect('/')->with('msg', 'evento adicionado');
     }

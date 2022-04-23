@@ -18,8 +18,13 @@
                         <a href="/">Eventos</a>
                     </li>
                     <li>
-                        <a href="/events/create">Criar meu evento</a>
+                        <a href="/events/create">Criar evento</a>
                     </li>
+                    @guest
+                    <li>
+                        <a href="/register">Cadastrar</a>
+                    </li>
+                    @endguest
                 </ul>
             </navbar> 
         </header>

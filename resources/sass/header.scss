@@ -1,0 +1,33 @@
+@import 'colors';
+@mixin header{
+    header{
+        display: flex;
+        position: sticky;
+        top: -1px;
+        margin-bottom: 110px;
+        padding-left: 15px;
+        nav{
+            margin-left: auto;
+            width: 727px;
+            height: 115px;
+            border-radius: 0 0 0 50px;
+            box-shadow: 0 0 50px 16px rgba(0,0,0,.1);
+            padding: 30px;
+            background-color: white;
+            ul{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                a{
+                    padding: 9px 15px;
+                    font-size: 16px;
+                    font-weight: 900;
+                    color: $primary;
+                    &:hover{
+                        color: $secondary;
+                    }
+                }
+            }
+        }
+    }
+}

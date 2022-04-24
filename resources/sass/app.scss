@@ -1,0 +1,9 @@
+@use 'header';
+@use 'page';
+@import '_reset';
+@import 'colors';
+body{
+    background-color: #f3f3f3;
+}
+@include header.header;
+@include page.pageDefault;

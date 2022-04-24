@@ -13,10 +13,11 @@ class EventController extends Controller
         $search = request('search');
         if($search){
             $events = Event::where([
-                ['title', 'like', '%'.$search.'%']
+                ['title', 'like', '%'.$search.'%'],
+                ['private', '!=', '1']
             ])->get();
         }else{
-            $events = Event::all();
+            $events = Event::where([['private', '!=', '1']]);
         }
         return view('events.list', [
             'events'=>$events,

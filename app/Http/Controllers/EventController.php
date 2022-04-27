@@ -17,7 +17,7 @@ class EventController extends Controller
                 ['private', '!=', '1']
             ])->get();
         }else{
-            $events = Event::where([['private', '!=', '1']]);
+            $events = Event::where([['private', '=', '0']])->get();
         }
         return view('events.list', [
             'events'=>$events,

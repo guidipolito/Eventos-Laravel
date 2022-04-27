@@ -26,8 +26,8 @@
                 <label for="target_date">Data de acontecimento</label>
                 <input type="date" name="target_date" id="target_date" />
             </div>
-            <label>Privado? <input type="checkbox" name="private"> <label>
-            <input type="submit" value="enviar"/>
+            <label>Privado? <input type="checkbox" name="private"> </label>
+            <button>Enviar</button>
         </form>
     </section>
 @endsection

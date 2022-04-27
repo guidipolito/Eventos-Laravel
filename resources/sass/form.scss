@@ -1,0 +1,27 @@
+@import "colors";
+@mixin input{
+    outline: none;
+    background-color: rgba(0, 0, 0, .01);
+    border: 0;
+}
+
+@mixin text{
+    font-size: 14px;
+    padding: 10px 30px;
+}
+@mixin label{
+    font-size: 18px;
+    font-weight: bold;
+    color: $secondary;
+}
+
+@mixin button{
+    background-color: $secondary;
+    font-size: 18px;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+    color: white;;
+    border-radius: 9px;
+    padding: 10px 30px;
+}

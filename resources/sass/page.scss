@@ -1,4 +1,13 @@
+@use 'form';
+
+@forward 'createEvent';
+@use 'createEvent' as *;
+
+@forward 'listEvent';
+@use 'listEvent' as *;
+
 @import 'colors';
+
 @mixin pageDefault{
     .main_title{
         display: flex;
@@ -18,16 +27,19 @@
         border-radius: 45px;
         padding: 50px;
         background-color: white;
+        >.msg{
+            margin-bottom: 5px;
+            text-align: center;
+            color: $primary;
+        }
         .main_search{
             display: flex;
             justify-content: space-between;
             input{
                 width: calc(100% - 60px);
                 font-size: 20px;
-                background-color: rgba(0,0,0,.01);
-                border: 0;
                 padding: 12px 30px;
-                outline: none;
+                @include form.input;
             }
             button{
                 height: 52px;
@@ -51,4 +63,16 @@
             }
         }
     }
+    .backgroundCanvas{
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+}
+
+@mixin styles{
+    @include pageDefault;
+    @include createEvent;
+    @include listEvent;
 }

@@ -54,6 +54,7 @@
             @endif
             @yield('content')
         </main>
+        <script src="/js/app.js"></script>
     </body>
 </html>
 

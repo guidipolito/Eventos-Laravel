@@ -1,5 +1,2 @@
-@use 'header';
-@use 'page';
-@import '_reset';
-@include header.header;
-@include page.styles;
+@use 'parts';
+@use 'pages';

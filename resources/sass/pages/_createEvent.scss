@@ -1,0 +1,26 @@
+@use "../form";
+.event_create-form{
+    text-align: center;
+    label{
+        @include form.label;
+        display: block;
+        text-align: center;
+        margin-bottom: 3px;
+    }
+    input[type="text"], textarea{
+        @include form.input;
+        @include form.text;
+        width: 100%;
+        max-width: 100%;
+    }
+    >div{
+        margin-bottom: 35px;
+        text-align: center;
+    }
+    >label{
+        margin-bottom: 20px;
+    }
+    >button{
+        @include form.button;
+    }
+}

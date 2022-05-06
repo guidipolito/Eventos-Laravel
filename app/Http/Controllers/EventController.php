@@ -41,6 +41,7 @@ class EventController extends Controller
             $ext = $img->extension();
             $imgName = md5($img->getClientOriginalName() . strtotime("now")).".".$ext;
             $img->move(public_path('img/events'), $imgName);
+            $imgName = "/img/events/".$imgName;
             $event->image = $imgName;
         }
         $user = auth()->user();
@@ -51,10 +52,16 @@ class EventController extends Controller
 
     public function show($id){
         $event = Event::findOrFail($id);
-
-        $owner = User::where('id', '=', $event->user_id)->first()->toArray();
-        #falta criar a view
-        return view('events.show', ['event'=>$event, 'owner'=>$owner]);
+        $user = auth()->user();
+        if($event){
+            $owner = User::where('id', '=', $event->user_id)->first();
+            if($event->private){
+                if($event->user_id != $user?->id){
+                    return;      
+                }
+            }
+            return view('events.show', ['event'=>$event, 'owner'=>$owner]);
+        }
     }
 
     public function destroy($id){

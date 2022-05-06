@@ -1,0 +1,30 @@
+@use '../colors' as *;
+.showEvent {
+    color: $txt;
+    >.introduction {
+        display: flex;
+        figure {
+            height: 300px;
+            background-color: $bg;
+            border-radius: 13px;
+            width: 55%;
+        }
+        .details{
+            text-align: right;
+            flex: 1;
+            h1{
+                color: $secondary;
+                font-weight: bold;
+            }
+            p b{
+                color: $primary;
+            }
+            p a{
+                color: $txt;
+            }
+            .short-description{
+                margin-top: 15px;
+            }
+        }
+    }
+}

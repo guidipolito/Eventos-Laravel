@@ -8,7 +8,7 @@ html {
   box-sizing: inherit;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, figure {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -232,6 +232,36 @@ main .main_search button:hover {
 }
 .event_list .event:not(:last-child) {
   border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.showEvent {
+  color: #2e3437;
+}
+.showEvent > .introduction {
+  display: flex;
+}
+.showEvent > .introduction figure {
+  height: 300px;
+  background-color: #f3f3f3;
+  border-radius: 13px;
+  width: 55%;
+}
+.showEvent > .introduction .details {
+  text-align: right;
+  flex: 1;
+}
+.showEvent > .introduction .details h1 {
+  color: #2c94e4;
+  font-weight: bold;
+}
+.showEvent > .introduction .details p b {
+  color: #f55291;
+}
+.showEvent > .introduction .details p a {
+  color: #2e3437;
+}
+.showEvent > .introduction .details .short-description {
+  margin-top: 15px;
 }
 /*
 @import 'tailwindcss/base';

@@ -4,10 +4,15 @@
     >.introduction {
         display: flex;
         figure {
-            height: 300px;
+            height: 390px;
             background-color: $bg;
             border-radius: 13px;
             width: 55%;
+            >img{
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
         }
         .details{
             text-align: right;

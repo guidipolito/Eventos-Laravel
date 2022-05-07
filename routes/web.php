@@ -16,15 +16,12 @@ use App\Http\Controllers\EventController;
 
 Route::get('/', [EventController::class, 'index']);
 
-Route::get('/contact', function(){
-    return view('contact' );
-});
 Route::get('/events', [EventController::class, 'index']);
-Route::get('/event/{id}', [EventController::class, 'show']);
-Route::get('/events/create', [EventController::class, 'createPage'])->middleware('auth');
-Route::post('/events', [EventController::class, 'store'])->middleware('auth');
+Route::post('/events', [EventController::class, 'store'])->middleware('auth'); //add event route
+Route::put('/events', [EventController::class, 'edit'])->middleware('auth');
+Route::get('/events/create', [EventController::class, 'createPage'])->middleware('auth'); //Add event form
+Route::get('/events/edit/{id}', [EventController::class, 'editPage'])->middleware('auth');
+Route::get('/events/{id}', [EventController::class, 'show']);
 Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth');;
-
-Route::get('/events/create', [EventController::class, 'createPage'])->middleware('auth');
 
 Route::get('/dashboard', [EventController::class, 'dashboard'])->middleware('auth');

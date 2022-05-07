@@ -179,6 +179,11 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
+
+        /*
+         *📷📷📷📷Provider para edição de imagens📷📷📷📷📷
+         */
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -194,6 +199,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Image' => 'Intervention\Image\Facades\Image',
     ])->toArray(),
 
 ];

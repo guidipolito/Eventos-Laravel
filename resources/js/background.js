@@ -8,6 +8,7 @@ export default function backgroundCanvas(){
         console.log("resize")
     }
     resizeCanvas()
+    window.addEventListener('resize', resizeCanvas)
 
     let imgs = []
     function genLeaf(opacity = 0.3, color = "f55593" ){
@@ -25,26 +26,29 @@ export default function backgroundCanvas(){
             this.vy = -(Math.random() * 1.3)
             this.isImgIndex = !isNaN(this.img)
             this.size = 100 * (Math.random() + 0.3);
-            this.x = - ( this.size + 20 + (Math.random()*100) )
-            this.y = canvas.height + this.size + Math.random()*20
+            this.x = ( this.size + 20 + (Math.random()*canvas.width)-canvas.width*.3 )
+            this.y = Math.random() * canvas.height + canvas.height * .3
             this.env = env
             this.index = index
             this.ax = 1
             this.ay = 1
             this.angle = 0
+            this.opacity = 0;
             let maxRotate = 0.8
             this.vr = Math.random() < 0.5 ? Math.random() * maxRotate : -(Math.random() * maxRotate);
         }
-        
+
         update(){
             this.vx*=this.ax
             this.vy*=this.ay
             this.x+=this.vx
             this.y+=this.vy
+            this.opacity+=0.002
             if(this.x > canvas.width || this.y < 0-this.size-20){
                 this.env[this.index] = new Leaf(this.ctx, 0, this.env, this.index)
             }
             this.ctx.save()
+            this.ctx.globalAlpha = this.opacity < 1 ? this.opacity : 1
             this.ctx.translate(this.x+(this.size/2), this.y+(this.size/2), )
             this.angle+=this.vr * Math.PI/360
             this.ctx.rotate(this.angle)

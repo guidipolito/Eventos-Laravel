@@ -1,4 +1,4 @@
-<a href="/">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="3.5in"
    height="2in"
@@ -60,5 +60,3 @@
        sodipodi:nodetypes="sssccccccsccccccccccccscccccssssccccccccsccssccsccsccccccccsccscscccsccccccccccsccssscccccccccccccccsccccccsccssscccccccccccscscccccccscccccccsccsccscsccsccscscscs" />
   </g>
 </svg>
-
-</a>

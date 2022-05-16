@@ -1,4 +1,5 @@
 export default function backgroundCanvas(){
+    const fps = 30
     let canvas = document.createElement('canvas')
     document.body.append(canvas)
     canvas.classList.add('backgroundCanvas')
@@ -43,7 +44,7 @@ export default function backgroundCanvas(){
             this.vy*=this.ay
             this.x+=this.vx
             this.y+=this.vy
-            this.opacity+=0.002
+            this.opacity+=0.006
             if(this.x > canvas.width || this.y < 0-this.size-20){
                 this.env[this.index] = new Leaf(this.ctx, 0, this.env, this.index)
             }
@@ -68,7 +69,7 @@ export default function backgroundCanvas(){
         const animate = () => {
             ctx.clearRect(0,0,canvas.width, canvas.height)
             leafs.forEach( item => item.render())
-            requestAnimationFrame(animate)
+            setTimeout( ()=>{ requestAnimationFrame(animate) }, 1000/fps )
         }
         animate()
     }

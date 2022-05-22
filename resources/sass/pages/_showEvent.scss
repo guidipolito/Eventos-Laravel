@@ -2,6 +2,12 @@
 .showEvent {
     color: $txt;
     >.introduction {
+        .join-btn{
+            margin-top: 5px;
+            &.leave{
+                filter: saturate(0);
+            }
+        }
         display: flex;
         figure {
             height: 390px;

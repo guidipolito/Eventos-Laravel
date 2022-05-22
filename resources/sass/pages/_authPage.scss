@@ -1,0 +1,52 @@
+@use '../colors' as *;
+@use '../form' as form;
+
+.auth{
+    display: flex;
+    justify-content: center;
+    form{
+        display: inline-block;
+        margin: auto;
+    }
+    input:not([type='checkbox']){
+        @include form.input;
+        margin-bottom: 15px;
+        padding: 15px;
+        display: block;
+        font-size: 15px;
+        width: 340px;
+    }
+    input[type='checkbox']{
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: solid 1px $secondary;
+        background-color: $bg;
+        display: inline-block;
+        font-size: 20px;
+        line-height: 20px;
+        transition: .2s;
+        &::after{
+            content: "✓";
+            color: $bg;
+            transition: .2s;
+        }
+        &:checked{
+            background-color: $secondary;
+            &::after{
+                color: white;
+            }
+        }
+    }
+    label{
+        @include form.label;
+    }
+    button{
+        @include form.button;
+        margin-top: 15px;
+    }
+    .forgoten_pass{
+        text-decoration: underline;
+        color: $primary;
+    }
+}

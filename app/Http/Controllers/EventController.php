@@ -35,7 +35,7 @@ class EventController extends Controller
         $imgName = md5($file->getClientOriginalName() . strtotime("now"));
         $imgName = "/img/events/".$imgName;
         $newImg = Image::make($file->path());
-        $newImg->save(public_path('img/events').'.jpg', 80);
+        $newImg->save(public_path().$imgName.'.jpg', 80);
         $response['normal']=$imgName.'.jpg';
         if($thumbnail){
             $newImg->fit(80);
@@ -54,7 +54,6 @@ class EventController extends Controller
         $event->private = $req->private ? true : false;
         if($req->hasFile('event_img') && $req->file('event_img')->isValid()){
             $img = $this->moveImage($req->event_img);
-            dd($img);
             $event->image = $img['normal'];
             $event->thumbnail = $img['thumbnail'];
         }
@@ -67,27 +66,54 @@ class EventController extends Controller
     public function show($id){
         $event = Event::findOrFail($id);
         $user = auth()->user();
+        $userJoined = false;
+        if($user){
+            $userJoined = $event->usersJoined()->find($user->id);
+        }
+
         if($event){
             $owner = User::where('id', '=', $event->user_id)->first();
+            //Eventos privados somente o dono pode ver
             if($event->private){
                 if($event->user_id != $user?->id){
                     return;
                 }
             }
-            return view('events.show', ['event'=>$event, 'owner'=>$owner]);
+            return view('events.show', ['event'=>$event, 'owner'=>$owner, 'userJoined'=>$userJoined]);
         }
     }
+
+    public function userJoin($id){
+        $event = Event::findOrFail($id);
+        $user = auth()->user();
+        if(!$event->usersJoined()->find($user->id)){
+            $event->usersJoined()->attach($user->id);
+            return redirect("/events/{$event->id}")->with('msg', 'Presença Marcada!');
+        }
+        return redirect("/events/{$event->id}")->with('msg', 'Você já estava com presença no evento!');
+    }
+
+    public function userLeave($id){
+        $event = Event::findOrFail($id);
+        $user = auth()->user();
+        if($event->usersJoined()->find($user->id)){
+            $event->usersJoined()->detach($user->id, 'user_id');
+            return redirect("/events/{$event->id}")->with('msg', 'Que pena! Presença retirada');
+        }
+        return redirect("/events/{$event->id}")->with('msg', 'Você não tinha presença nesse evento');
+    }
+
     public function edit(Request $req){
-        dd($req);
         $updateId = $req->id;
-        if(!is_numeric){
+        if(!is_numeric($updateId)){
             return View('errors.404');
         }
+        $updateId = intval($updateId);
         $event = Event::findOrFail($updateId);
         $event->title = $req->title;
         $event->date = $req->target_date;
         $event->city = $req->city;
-        $event->description = $req->desc;
+        $event->description = $req->desc|| '';
         $event->private = $req->private ? true : false;
         $oldImage = $event->image;
         if($req->hasFile('event_img') && $req->file('event_img')->isValid()){
@@ -104,7 +130,9 @@ class EventController extends Controller
         $user = auth()->user();
         $event->user_id = $user->id;
         if($event->save() && $oldImage != $event->image){
-            File::delete($oldImage);
+            if( file_exists(public_path($oldImage))){
+                File::delete($oldImage);
+            }
         }
     }
     public function editPage($id){

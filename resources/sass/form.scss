@@ -16,12 +16,13 @@
 }
 
 @mixin button{
+    display: inline-block;
     background-color: $secondary;
     font-size: 18px;
     font-weight: bold;
     border: 0;
     cursor: pointer;
-    color: white;;
+    color: white;
     border-radius: 9px;
     padding: 10px 30px;
 }

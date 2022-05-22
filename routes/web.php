@@ -22,6 +22,9 @@ Route::put('/events', [EventController::class, 'edit'])->middleware('auth');
 Route::get('/events/create', [EventController::class, 'createPage'])->middleware('auth'); //Add event form
 Route::get('/events/edit/{id}', [EventController::class, 'editPage'])->middleware('auth');
 Route::get('/events/{id}', [EventController::class, 'show']);
-Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth');;
+Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth');
+
+Route::get('/events/{id}/join', [EventController::class, 'userJoin'])->middleware('auth');
+Route::get('/events/{id}/leave', [EventController::class, 'userLeave'])->middleware('auth');
 
 Route::get('/dashboard', [EventController::class, 'dashboard'])->middleware('auth');

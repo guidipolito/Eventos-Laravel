@@ -26,7 +26,7 @@
                 <div class="details">
                     <h3><a href="/events/{{$event->id}}">{{$event->title}}</a></h3>
                     <p>{{$event->description}}</p>
-                    <p>X pessoas planejam participar</p>
+                    <p>{{$event->usersJoined()->count()}} pessoas planejam participar</p>
                     <p>Data de acontecimendo: {{ date('d/m/y', strtotime($event->date)) }}</p>
                 </div>
                 <a class="edit-btn" href="events/edit/{{$event->id}}">Editar</a>

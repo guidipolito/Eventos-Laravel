@@ -32,6 +32,40 @@
                 }
             }
         }
+        &_actions{
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right: 0;
+            top: 10px;
+        }
+        .remove-btn,.edit-btn{
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: .3s  ease;
+            svg{
+                stroke: white;
+                vertical-align: middle;
+            }
+            &:hover{
+                transform: scale(1.1)
+            }
+        }
+        .edit-btn{
+            background-color: $secondary;
+            margin-bottom: 5px;
+            &:hover{
+                box-shadow: 0 0 5px $secondary;
+            }
+        }
+        .remove-btn{
+            background-color: $primary;
+            &:hover{
+                box-shadow: 0 0 6px 1px $primary;
+            }
+        }
         >.participar{
             position: absolute;
             top: calc( 50% - 22.5px);

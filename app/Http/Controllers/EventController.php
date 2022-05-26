@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\File;
 use App\Models\Event;
 use App\Models\User;
 use Image;
@@ -116,6 +116,7 @@ class EventController extends Controller
         $event->description = $req->desc|| '';
         $event->private = $req->private ? true : false;
         $oldImage = $event->image;
+        $oldThumb = $event->thumbnail;
         if($req->hasFile('event_img') && $req->file('event_img')->isValid()){
             $img = $req->event_img;
             $ext = $img->extension();
@@ -131,9 +132,13 @@ class EventController extends Controller
         $event->user_id = $user->id;
         if($event->save() && $oldImage != $event->image){
             if( file_exists(public_path($oldImage))){
-                File::delete($oldImage);
+                File::delete(public_path($oldImage));
+            }
+            if(file_exists(public_path($oldThumb))){
+                File::delete(public_path($oldThumb));
             }
         }
+        return redirect('/events/edit/'.$updateId)->with('msg', 'Evento alterado');
     }
     public function editPage($id){
         $event = Event::findOrFail($id);
@@ -143,8 +148,18 @@ class EventController extends Controller
         }
     }
     public function destroy($id){
-        $result = Event::findOrFail($id)->delete();
-        return redirect('/dashboard')->with('msg', $result ? "Evento removido com sucesso" : "Falha ao remover evento");
+        $event = Event::findOrFail($id);
+        $img = $event->image;
+        $thumb = $event->thumbnail;
+        if( file_exists(public_path($img))){
+            File::delete(public_path($img));
+        }
+        if(file_exists(public_path($thumb))){
+            File::delete(public_path($thumb));
+        }
+        $event->usersJoined()->detach();
+        $event->delete();
+        return redirect('/dashboard')->with('msg', "Evento removido com sucesso");
     }
 
     public function dashboard(){
